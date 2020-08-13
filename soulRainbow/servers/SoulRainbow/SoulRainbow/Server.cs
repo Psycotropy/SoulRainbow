@@ -14,12 +14,14 @@ namespace SoulRainbow
 {
     class Server
     {
-        public Server() {
+        public Server()
+        {
             SetVariables();
         }
 
         //In this method we are setting the fundamental variables of the class.
-        private void SetVariables() {
+        private void SetVariables()
+        {
             this.connectionsInfoKeys = 1;
             this.connectionsInfoKeys = 1;
 
@@ -27,55 +29,59 @@ namespace SoulRainbow
             connectionsSockets = new Dictionary<int, TcpClient>();
         }
 
-        public void SetUserPort(int port) {
+        public void SetUserPort(int port)
+        {
             this.port = port;
         }
 
-        public string GetConnectionInfo() {
+        public string GetConnectionInfo()
+        {
             return this.connectionInfo;
         }
 
-        public void serverStart() {
+        public void serverStart()
+        {
 
             //Creates a new Tcp listen instance at port .
             TcpListener.Create(port);
-            
+
             //server was defined listen at port in any interfaces 
             server = new TcpListener(IPAddress.Parse("192.168.1.229"), port);
-            
+
             server.Start(5);
             //accepting the client connection request
-            server.BeginAcceptTcpClient(AcceptCallBack, null);
+            server.BeginAcceptTcpClient(AcceptCallBack, server);
         }
 
-  
+
 
         private void AcceptCallBack(IAsyncResult result)
         {
             TcpClient connection;
             //NetworkStream stream;
-            
+
 
             try
             {
                 connection = server.EndAcceptTcpClient(result);
                 MessageBox.Show("Client connected");
-                
+
             }
-            catch (ObjectDisposedException ex) {
+            catch (ObjectDisposedException ex)
+            {
                 MessageBox.Show("Caught, problem with creating socket for connection {0}", ex.ToString());
 
                 return;
             }
-            
-            
+
+
             httpHandler(connection);
         }
 
         private void httpHandler(TcpClient connection)
         {
             //flag 1: means do the client stream read process..
-            
+
             connectionInfo = streamReader(connection);
             //verifies if the connection is HTTP or socket
             if (Regex.IsMatch(connectionInfo, "^GET", RegexOptions.IgnoreCase))
@@ -93,11 +99,18 @@ namespace SoulRainbow
                 this.connectionsInfoKeys++;
             }
 
+            NetworkStream stream = connection.GetStream();
+
+            string i = streamReader(connection);
+            MessageBox.Show(i);
+
             
-            
+
+
         }
 
-        private string httpWebSocketResponseKey(string header) {
+        private string httpWebSocketResponseKey(string header)
+        {
             //Search in the header for the web socket key
             string pattern = "Sec-WebSocket-Key: (.*)";
             string webSocketKey = Regex.Match(header, pattern).Groups[1].Value.Trim();
@@ -118,18 +131,20 @@ namespace SoulRainbow
 
             return response;
 
-            
 
-           
+
+
         }
 
         //This returns the connections messages or failing that an error message 
-        private string streamReader(TcpClient connection) {
+        private string streamReader(TcpClient connection)
+        {
             NetworkStream stream = connection.GetStream();
 
             byte[] bytes = new byte[connection.ReceiveBufferSize];
 
-            if (stream.CanRead) {
+            if (stream.CanRead)
+            {
                 stream.Read(bytes, 0, (int)connection.ReceiveBufferSize);
 
                 return connectionInfo = Encoding.UTF8.GetString(bytes);
