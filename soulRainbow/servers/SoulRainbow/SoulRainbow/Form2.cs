@@ -22,7 +22,7 @@ namespace SoulRainbow
         {
             Configuration my_configuration = new Configuration();
             my_configuration.setConfProperties(textBox_port.Text);
-            my_configuration.createConfFile();
+            my_configuration.configurate();
 
             this.Close();
         }

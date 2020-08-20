@@ -13,7 +13,8 @@ namespace SoulRainbow
     {
         public Configuration()
         {
-            filePath = "config.conf";
+            this.filePath = "config.conf";
+            this.clientsCabinetPath = "clients.txt";
             
         }
 
@@ -25,79 +26,117 @@ namespace SoulRainbow
             else
                 MessageBox.Show("The valid port range is between 0 - 65.535");
 
-
-
-
-
         }
 
-        
         // this method verifies if Port numeber is valid
         private bool PortLocalVer(string portLocal)
         {
-
             if (Int32.Parse(portLocal) >= 0 || Int32.Parse(portLocal) < 65.535)
                 return true;
             else
                 return false;
         }
 
-
-
-        public void createConfFile()
+        public void configurate()
         {
-            
+            FileManager manager = new FileManager(filePath);
+            manager.Create();
+        }
 
-            if (File.Exists(filePath))
+        public string readPort()
+        {
+            FileManager manager = new FileManager(filePath);
+            return manager.readLineByString(PortLocal);
+        }
+
+
+
+        private string filePath;
+        private string PortLocal;
+        private string clientsCabinetPath;
+        
+
+    }
+
+
+    public class FileManager
+    {
+        public FileManager(string filePath)
+        {
+            setFilePath(filePath);
+        }
+
+
+        private void setFilePath(string filePath)
+        {
+            this.filePath = filePath;
+        }
+
+        public void Create()
+        {
+            if (!File.Exists(this.filePath))
             {
-                //MessageBox.Show("Existe");
-                addConfigFileCont();
+                StreamWriter sw = File.CreateText(this.filePath);
             }
             else
             {
-                StreamWriter sw = File.CreateText(filePath);
-                addConfigFileCont();
+                return;
             }
         }
 
-        private void addConfigFileCont()
+        public void addLine(string text)
         {
-            try{
-                StreamWriter sw = new StreamWriter(filePath);
-
-                sw.WriteLine("{0}", PortLocal);
-
-                sw.Close();
-            }
-            catch (Exception e)
+            if (File.Exists(this.filePath))
             {
-                MessageBox.Show("Message: ", e.ToString());
+                try
+                {
+                    StreamWriter sw = new StreamWriter(filePath);
+
+                    sw.WriteLine(text);
+
+                    sw.Close();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            
         }
 
-        //use flag system to read especific part of the config line
-        public string readConfigFile()
+        public string[] readAll()
         {
-
-            //open and charging of config line
             StreamReader sr = new StreamReader(filePath);
 
-            string line = sr.ReadLine();
+            string[] lines = File.ReadAllLines(filePath);
 
             sr.Close();
 
-           // MessageBox.Show("There has been a problem with the configuration line " + line);
-
-            
-
-            return line;
+            return lines;
         }
 
-        string filePath;
+        public string readLineByString(string query)
+        {
+            StreamReader sr = new StreamReader(this.filePath);
 
-        string PortLocal;
-        
+            try
+            {
+                string[] fileLines = readAll();
+                int fileLenght = fileLines.Length;
 
+                for (int i = 0; i < fileLenght; i++)
+                {
+                    if (fileLines[i].Contains(query))
+                        return fileLines[i];
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return null;
+        }
+
+        private string filePath;
     }
 }

@@ -17,9 +17,13 @@ namespace SoulRainbow
             InitializeComponent();
 
             //inititalazing object type variables
-            configurationForm = new Form2();
-            my_configuration = new Configuration();
-            my_server = new Server();
+            this.configurationForm = new Form2();
+            this.myConfiguration = new Configuration();
+            this.myServer = new Server();
+            this.XMLDialog = new OpenFileDialog();
+            XMLDialog.InitialDirectory = @"E:\Tools\soulRainbow\servers\SoulRainbow\SoulRainbow\XMLcommandExamples";
+            XMLDialog.Title = "Browse Xml Files";
+            XMLDialog.DefaultExt = "xml";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -44,39 +48,38 @@ namespace SoulRainbow
 
         private void button_listen_Click(object sender, EventArgs e)
         {
-            port = Int32.Parse(my_configuration.readConfigFile());
+            port = Int32.Parse(myConfiguration.readPort());
+            MessageBox.Show(port.ToString());
             //setting server parameters
-            my_server.SetUserPort(port);
+            myServer.SetUserPort(port);
             //starting server listen ...
-            my_server.serverStart(); 
+            myServer.serverStart(); 
             
         }
-
-        Form2 configurationForm;
-        Configuration my_configuration;
-        Server my_server;
-        int port;
 
         private void button_WS_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button_XmlRequ_Click(object sender, EventArgs e)
+        private void button_XmlRequest_Click(object sender, EventArgs e)
         {
-            this.loadXML.Name = "Buton_loadXml";
-            this.loadXML.Dock = DockStyle.Top;
-            this.loadXML.Text = "Load XML file";
             panel1.Controls.Add(loadXML);
-            
-            /*this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            panel1.Controls.Add(button1);*/
+        }
+
+        private void Button_loadXml_click(object sender, EventArgs e)
+        {
+            XMLDialog.ShowDialog();
+            list_ActConnections.Items.Add("Using XML file : " + XMLDialog.FileName);
         }
 
 
+        private Form2 configurationForm;
+        private Configuration myConfiguration;
+        private Server myServer;
+        private int port;
+        private OpenFileDialog XMLDialog;
+
     }
+
 }
