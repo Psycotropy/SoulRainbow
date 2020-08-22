@@ -77,9 +77,10 @@ namespace SoulRainbow
             if (!File.Exists(this.filePath))
             {
                 StreamWriter sw = File.CreateText(this.filePath);
+                sw.Close();
             }
             else
-            {
+            { 
                 return;
             }
         }
@@ -90,7 +91,7 @@ namespace SoulRainbow
             {
                 try
                 {
-                    StreamWriter sw = new StreamWriter(filePath);
+                    StreamWriter sw = new StreamWriter(this.filePath);
 
                     sw.WriteLine(text);
 
@@ -120,6 +121,7 @@ namespace SoulRainbow
 
             try
             {
+                //use de read all function to later select the line that contains the searched query
                 string[] fileLines = readAll();
                 int fileLenght = fileLines.Length;
 

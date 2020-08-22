@@ -24,6 +24,12 @@ namespace SoulRainbow
             XMLDialog.InitialDirectory = @"E:\Tools\soulRainbow\servers\SoulRainbow\SoulRainbow\XMLcommandExamples";
             XMLDialog.Title = "Browse Xml Files";
             XMLDialog.DefaultExt = "xml";
+            setMenuToFalse();
+        }
+
+        private void setMenuToFalse()
+        {
+            this.optionXHR = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -48,13 +54,29 @@ namespace SoulRainbow
 
         private void button_listen_Click(object sender, EventArgs e)
         {
-            port = Int32.Parse(myConfiguration.readPort());
+
+
+            if (this.optionXHR == true)
+            {
+
+                if (this.commandFile.Length > 0)
+                {
+                    XMLServer server = new XMLServer();
+                    server.setXMLFilePath(this.commandFile);
+                    server.startServerXML();
+                }
+                else
+                {
+                    MessageBox.Show("Debe elegir un archivo con comandos XML");
+                }
+            }
+
+            /*port = Int32.Parse(myConfiguration.readPort());
             MessageBox.Show(port.ToString());
             //setting server parameters
             myServer.SetUserPort(port);
             //starting server listen ...
-            myServer.serverStart(); 
-            
+            myServer.serverStart();*/
         }
 
         private void button_WS_Click(object sender, EventArgs e)
@@ -69,8 +91,16 @@ namespace SoulRainbow
 
         private void Button_loadXml_click(object sender, EventArgs e)
         {
+            //show dialog to select XML file
             XMLDialog.ShowDialog();
-            list_ActConnections.Items.Add("Using XML file : " + XMLDialog.FileName);
+            this.commandFile = XMLDialog.FileName;
+            //verify if in the dialog the user selects a file
+            if (this.commandFile.Length > 0)
+            {
+                list_ActConnections.Items.Add("Using XML file : " + this.commandFile);
+            }            
+            setMenuToFalse();
+            this.optionXHR = true;
         }
 
 
@@ -79,6 +109,10 @@ namespace SoulRainbow
         private Server myServer;
         private int port;
         private OpenFileDialog XMLDialog;
+        private string commandFile;
+
+        //menu selection flags
+        private bool optionXHR;
 
     }
 
