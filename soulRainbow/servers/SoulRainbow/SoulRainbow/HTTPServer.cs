@@ -48,6 +48,13 @@ namespace SoulRainbow
             {
                 //reques for the fisical location of the virtual folder requested
                 this.responseString = locateRequestedFile(context.Request.RawUrl);
+                this.file = "E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt";
+                context.Response.ContentType = "application/xml";
+                //Enables CORS to be able to recive GET to transfer XML files
+                //TODO: when we have a domain change '*' to 'www.domain.com'
+                context.Response.AppendHeader("Access-Control-Allow-Origin", "*");
+ 
+                
                 //converts to ASCII 
                 byte[] buffer = Encoding.ASCII.GetBytes(this.responseString);
                 context.Response.ContentLength64 = buffer.Length;
@@ -108,6 +115,7 @@ namespace SoulRainbow
         private HttpListener listener;
         private string response;
         private string responseString;
+        private string file;
     }
 
     public class XMLServer : HTTPServer

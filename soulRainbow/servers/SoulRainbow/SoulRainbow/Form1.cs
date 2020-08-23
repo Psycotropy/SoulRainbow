@@ -21,7 +21,7 @@ namespace SoulRainbow
             this.myConfiguration = new Configuration();
             this.myServer = new Server();
             this.XMLDialog = new OpenFileDialog();
-            XMLDialog.InitialDirectory = @"E:\Tools\soulRainbow\servers\SoulRainbow\SoulRainbow\XMLcommandExamples";
+            XMLDialog.InitialDirectory = @"E:\Tools\soulRainbow\servers\SoulRainbow\SoulRainbow\www\XHR";
             XMLDialog.Title = "Browse Xml Files";
             XMLDialog.DefaultExt = "xml";
             setMenuToFalse();
