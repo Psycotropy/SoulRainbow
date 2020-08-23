@@ -1,0 +1,14 @@
+/index, E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/index.html
+/index/XHR, E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/XHR/startControl.xml
+
+
+
+
+
+
+
+
+
+
+
+
