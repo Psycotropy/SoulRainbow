@@ -1,3 +1,0 @@
-186 user_pref("network.proxy.http", "127.0.0.1");
-187 user_pref("network.proxy.http_port", 8080);
-188 user_pref("network.proxy.type", 0);
