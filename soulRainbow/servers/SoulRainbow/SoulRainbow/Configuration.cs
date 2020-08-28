@@ -18,15 +18,19 @@ namespace SoulRainbow
             
         }
 
-        public void setConfProperties(string PortLocal)
+        public void setConfProperties(string channelName, string PortLocal)
         {
 
             if (PortLocalVer(PortLocal) == true)
+            {
                 this.PortLocal = PortLocal;
+                this.channelName = channelName;
+            }
             else
                 MessageBox.Show("The valid port range is between 0 - 65.535");
 
         }
+
 
         // this method verifies if Port numeber is valid
         private bool PortLocalVer(string portLocal)
@@ -39,8 +43,56 @@ namespace SoulRainbow
 
         public void configurate()
         {
+            string configToAdd = this.channelName + "," + this.PortLocal;
+
             FileManager manager = new FileManager(filePath);
+
+            //Get all in memory about actual configuration
+            List<string> actualConfigList = new List<string>(manager.readAll());
+
+
+            //search for old configuration that has to be changed in the configuration file and removes it 
+            try
+            { 
+                foreach (string line in actualConfigList)
+                {
+                    
+                    string []channel = line.Split(',');
+                    if (channel[0].Contains(this.channelName))
+                    {
+                        //verfies if the part number is a digit 
+                        if (channel[1].All<char>(char.IsDigit))
+                        {
+
+                            actualConfigList.Remove(line);
+
+                        }
+                                                    
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                //this was empty beacause not exists the remove of repeated line throws an exception. 
+            }
+
+
+            //delete the actual configuration file
+            File.Delete(this.filePath);
+
+            //again creates the config file but empty
             manager.Create();
+
+            //load the config without the repeated line
+            foreach(string line in actualConfigList)
+            {
+                manager.addLine(line);
+            }
+                   
+            //Add the new configuration to the config file
+            manager.addLine(configToAdd);
+            
         }
 
         public string readPort()
@@ -53,6 +105,7 @@ namespace SoulRainbow
 
         private string filePath;
         private string PortLocal;
+        private string channelName;
         private string clientsCabinetPath;
         
 
@@ -91,10 +144,12 @@ namespace SoulRainbow
             {
                 try
                 {
-                    StreamWriter sw = new StreamWriter(this.filePath);
+                    FileStream sw = new FileStream(this.filePath, FileMode.Append);
 
-                    sw.WriteLine(text);
-
+                    byte[] buffer = Encoding.ASCII.GetBytes(text + "\r\n");
+                    sw.Write(buffer, 0, buffer.Length);
+                               
+                    
                     sw.Close();
                 }
                 catch (Exception e)
@@ -139,6 +194,9 @@ namespace SoulRainbow
             return null;
         }
 
+        
+
         private string filePath;
+        
     }
 }

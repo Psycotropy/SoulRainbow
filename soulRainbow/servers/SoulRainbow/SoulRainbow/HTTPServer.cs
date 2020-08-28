@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-using System.Threading;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SoulRainbow
 {
@@ -20,18 +16,24 @@ namespace SoulRainbow
         private void setProperties()
         {
             this.listener = new HttpListener();
+            this.reader = new FileManager("config.conf");
         }
 
         //this function establish the response body of the request(XML, txt, messaging, etc...)
         private void SetResponseContent(string response)
         {
             this.response = response;
+            
         }
 
         public void start()
         {
-            listener.Prefixes.Add("http://*:5555/");
-            
+
+            string portLine = reader.readLineByString("XHR");
+            string[] portLineSplit = portLine.Split(',');
+            string port = portLineSplit[1];
+            //MessageBox.Show("At port: " + port);
+            listener.Prefixes.Add("http://*:" + port + "/");
             listener.Start();
             listener.BeginGetContext(onCallback, null);
         }
@@ -48,7 +50,7 @@ namespace SoulRainbow
             {
                 //reques for the fisical location of the virtual folder requested
                 this.responseString = locateRequestedFile(context.Request.RawUrl);
-                this.file = "E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt";
+                this.file = "E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt";
                 context.Response.ContentType = "application/xml";
                 //Enables CORS to be able to recive GET to transfer XML files
                 //TODO: when we have a domain change '*' to 'www.domain.com'
@@ -85,7 +87,7 @@ namespace SoulRainbow
         //this method provides the fisical directory equivalent of the virtual directory using routing.txt like index
         private string locateRequestedFile(string url)
         {
-            FileManager manager = new FileManager("E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt");
+            FileManager manager = new FileManager("E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt");
             //read the requested file
             string[] fileReading = manager.readAll();
             string requestedDirectory;
@@ -113,6 +115,7 @@ namespace SoulRainbow
         }
 
         private HttpListener listener;
+        private FileManager reader;
         private string response;
         private string responseString;
         private string file;

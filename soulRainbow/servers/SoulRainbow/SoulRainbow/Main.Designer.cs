@@ -1,6 +1,6 @@
 ﻿namespace SoulRainbow
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel_general = new System.Windows.Forms.Panel();
             this.list_ActConnections = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -67,7 +68,7 @@
             this.panel_general.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_general.Location = new System.Drawing.Point(0, 182);
             this.panel_general.Name = "panel_general";
-            this.panel_general.Size = new System.Drawing.Size(699, 356);
+            this.panel_general.Size = new System.Drawing.Size(718, 356);
             this.panel_general.TabIndex = 2;
             this.panel_general.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_general_Paint);
             // 
@@ -77,7 +78,7 @@
             this.list_ActConnections.FormattingEnabled = true;
             this.list_ActConnections.Location = new System.Drawing.Point(0, 100);
             this.list_ActConnections.Name = "list_ActConnections";
-            this.list_ActConnections.Size = new System.Drawing.Size(396, 256);
+            this.list_ActConnections.Size = new System.Drawing.Size(415, 256);
             this.list_ActConnections.TabIndex = 3;
             // 
             // panel3
@@ -87,14 +88,14 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(396, 100);
+            this.panel3.Size = new System.Drawing.Size(415, 100);
             this.panel3.TabIndex = 2;
             // 
             // label_connections
             // 
             this.label_connections.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_connections.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_connections.Location = new System.Drawing.Point(85, 36);
+            this.label_connections.Location = new System.Drawing.Point(94, 36);
             this.label_connections.Name = "label_connections";
             this.label_connections.Size = new System.Drawing.Size(224, 30);
             this.label_connections.TabIndex = 0;
@@ -129,7 +130,7 @@
             this.panel1.Controls.Add(this.button_stop);
             this.panel1.Controls.Add(this.button_listen);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(396, 0);
+            this.panel1.Location = new System.Drawing.Point(415, 0);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(303, 356);
@@ -186,7 +187,7 @@
             this.label_title.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.label_title.ForeColor = System.Drawing.Color.Crimson;
-            this.label_title.Location = new System.Drawing.Point(248, 32);
+            this.label_title.Location = new System.Drawing.Point(258, 32);
             this.label_title.Name = "label_title";
             this.label_title.Size = new System.Drawing.Size(247, 48);
             this.label_title.TabIndex = 0;
@@ -201,7 +202,7 @@
             this.panel_title.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_title.Location = new System.Drawing.Point(0, 0);
             this.panel_title.Name = "panel_title";
-            this.panel_title.Size = new System.Drawing.Size(699, 182);
+            this.panel_title.Size = new System.Drawing.Size(718, 182);
             this.panel_title.TabIndex = 1;
             // 
             // panel4
@@ -211,7 +212,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 118);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.panel4.Size = new System.Drawing.Size(699, 64);
+            this.panel4.Size = new System.Drawing.Size(718, 64);
             this.panel4.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -232,27 +233,28 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(697, 64);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(716, 64);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // button_messaging
             // 
             this.button_messaging.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_messaging.Location = new System.Drawing.Point(420, 3);
+            this.button_messaging.Location = new System.Drawing.Point(432, 3);
             this.button_messaging.Name = "button_messaging";
             this.button_messaging.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button_messaging.Size = new System.Drawing.Size(133, 58);
+            this.button_messaging.Size = new System.Drawing.Size(137, 58);
             this.button_messaging.TabIndex = 2;
             this.button_messaging.Text = "Messaging";
             this.button_messaging.UseVisualStyleBackColor = true;
+            this.button_messaging.Click += new System.EventHandler(this.button_messaging_Click);
             // 
             // button_XmlRequest
             // 
             this.button_XmlRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_XmlRequest.Location = new System.Drawing.Point(142, 3);
+            this.button_XmlRequest.Location = new System.Drawing.Point(146, 3);
             this.button_XmlRequest.Name = "button_XmlRequest";
             this.button_XmlRequest.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button_XmlRequest.Size = new System.Drawing.Size(133, 58);
+            this.button_XmlRequest.Size = new System.Drawing.Size(137, 58);
             this.button_XmlRequest.TabIndex = 0;
             this.button_XmlRequest.Text = "XMLrequestPolling";
             this.button_XmlRequest.UseVisualStyleBackColor = true;
@@ -264,7 +266,7 @@
             this.button_WS.Location = new System.Drawing.Point(3, 3);
             this.button_WS.Name = "button_WS";
             this.button_WS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button_WS.Size = new System.Drawing.Size(133, 58);
+            this.button_WS.Size = new System.Drawing.Size(137, 58);
             this.button_WS.TabIndex = 4;
             this.button_WS.Text = "Web Socket";
             this.button_WS.UseVisualStyleBackColor = true;
@@ -273,40 +275,47 @@
             // button_DNS
             // 
             this.button_DNS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_DNS.Location = new System.Drawing.Point(281, 3);
+            this.button_DNS.Location = new System.Drawing.Point(289, 3);
             this.button_DNS.Name = "button_DNS";
             this.button_DNS.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.button_DNS.Size = new System.Drawing.Size(133, 58);
+            this.button_DNS.Size = new System.Drawing.Size(137, 58);
             this.button_DNS.TabIndex = 3;
             this.button_DNS.Text = "DNS tunnel";
             this.button_DNS.UseVisualStyleBackColor = true;
+            this.button_DNS.Click += new System.EventHandler(this.button_DNS_Click);
             // 
             // button_CORS2
             // 
             this.button_CORS2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_CORS2.Location = new System.Drawing.Point(559, 3);
+            this.button_CORS2.Location = new System.Drawing.Point(575, 3);
             this.button_CORS2.Name = "button_CORS2";
-            this.button_CORS2.Size = new System.Drawing.Size(135, 58);
+            this.button_CORS2.Size = new System.Drawing.Size(138, 58);
             this.button_CORS2.TabIndex = 5;
             this.button_CORS2.Text = "CORS";
             this.button_CORS2.UseVisualStyleBackColor = true;
+            this.button_CORS2.Click += new System.EventHandler(this.button_CORS2_Click);
             // 
             // loadXML
             // 
+            this.loadXML.Dock = System.Windows.Forms.DockStyle.Top;
             this.loadXML.Location = new System.Drawing.Point(0, 0);
             this.loadXML.Name = "loadXML";
-            this.loadXML.Size = new System.Drawing.Size(75, 23);
+            this.loadXML.Size = new System.Drawing.Size(75, 54);
             this.loadXML.TabIndex = 0;
+            this.loadXML.Text = "Load XML file";
+            this.loadXML.UseVisualStyleBackColor = true;
+            this.loadXML.Click += new System.EventHandler(this.Button_loadXml_click);
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 538);
+            this.ClientSize = new System.Drawing.Size(718, 538);
             this.Controls.Add(this.panel_general);
             this.Controls.Add(this.panel_title);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(620, 577);
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "SoulRainbow";
             this.panel_general.ResumeLayout(false);
             this.panel_general.PerformLayout();
@@ -316,13 +325,6 @@
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            //Button load XMl
-            this.loadXML.Name = "Button_loadXml";
-            this.loadXML.UseVisualStyleBackColor = true;
-            this.loadXML.Height = 54;
-            this.loadXML.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadXML.Text = "Load XML file";
-            this.loadXML.Click += new System.EventHandler(this.Button_loadXml_click);
 
         }
 

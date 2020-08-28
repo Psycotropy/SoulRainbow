@@ -1,27 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SoulRainbow
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
             //inititalazing object type variables
-            this.configurationForm = new Form2();
+            this.XHRconfiguration = new XHRconfig();
             this.myConfiguration = new Configuration();
-            this.myServer = new Server();
             this.XMLDialog = new OpenFileDialog();
-            XMLDialog.InitialDirectory = @"E:\Tools\soulRainbow\servers\SoulRainbow\SoulRainbow\www\XHR";
+            this.serverPathDialog = new OpenFileDialog();
+
+            //initialazing XML dialog deafaults
+            XMLDialog.InitialDirectory = @"";
             XMLDialog.Title = "Browse Xml Files";
             XMLDialog.DefaultExt = "xml";
             setMenuToFalse();
@@ -49,18 +44,28 @@ namespace SoulRainbow
 
         private void button_configuration_Click(object sender, EventArgs e)
         {
-            configurationForm.Show();
+            if (this.optionXHR)
+            {
+                XHRconfiguration.Show();
+            }
+            else
+            {
+                return;
+            }
+
+            
         }
 
         private void button_listen_Click(object sender, EventArgs e)
         {
-
+            this.optionXHR = true;
 
             if (this.optionXHR == true)
             {
 
                 if (this.commandFile.Length > 0)
                 {
+                    //MessageBox.Show("pwn");
                     XMLServer server = new XMLServer();
                     server.setXMLFilePath(this.commandFile);
                     server.startServerXML();
@@ -71,26 +76,22 @@ namespace SoulRainbow
                 }
             }
 
-            /*port = Int32.Parse(myConfiguration.readPort());
-            MessageBox.Show(port.ToString());
-            //setting server parameters
-            myServer.SetUserPort(port);
-            //starting server listen ...
-            myServer.serverStart();*/
         }
 
         private void button_WS_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Under construction");
         }
 
         private void button_XmlRequest_Click(object sender, EventArgs e)
         {
             panel1.Controls.Add(loadXML);
+            this.optionXHR = true;
         }
 
         private void Button_loadXml_click(object sender, EventArgs e)
         {
+            XMLDialog.InitialDirectory = "E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/XHR";
             //show dialog to select XML file
             XMLDialog.ShowDialog();
             this.commandFile = XMLDialog.FileName;
@@ -100,20 +101,36 @@ namespace SoulRainbow
                 list_ActConnections.Items.Add("Using XML file : " + this.commandFile);
             }            
             setMenuToFalse();
-            this.optionXHR = true;
+            
+        }
+
+        private void button_DNS_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Under construction");
+        }
+
+        private void button_messaging_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Under construction");
+        }
+
+        private void button_CORS2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Under construction");
         }
 
 
-        private Form2 configurationForm;
+
+        private XHRconfig XHRconfiguration;
         private Configuration myConfiguration;
-        private Server myServer;
-        private int port;
         private OpenFileDialog XMLDialog;
+        private OpenFileDialog serverPathDialog;
         private string commandFile;
 
         //menu selection flags
         private bool optionXHR;
 
+        
     }
 
 }
