@@ -1,5 +1,5 @@
-/index, E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/index.html
-/index/XHR/XML1.xml, E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/XHR/startControl.xml
+/index, E:/github/RetainingControl/soulRainbow/SoulRainbow/www/index.html
+/index/XHR/XML1.xml, E:/github/RetainingControl/soulRainbow/SoulRainbow/www/XHR/startControl.xml
 
 
 

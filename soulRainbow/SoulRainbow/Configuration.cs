@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +102,26 @@ namespace SoulRainbow
             return manager.readLineByString(PortLocal);
         }
 
+        public void routingFileGenerator(string wwwPath, Dictionary<string, string> linkedDirectories)
+        {
+            string routingTxtPath = wwwPath + "\\" + "routing2.txt";
+
+            File.Delete(routingTxtPath);
+
+            FileManager manager = new FileManager(routingTxtPath);
+
+            
+
+            foreach (KeyValuePair<string, string> linkedDir in linkedDirectories)
+            {
+                manager.Create();
+
+                string line = linkedDir.Value + ", " + linkedDir.Key;
+
+                manager.addLine(line);
+            }
+        }
+
 
 
         private string filePath;
@@ -112,6 +133,10 @@ namespace SoulRainbow
     }
 
 
+    /// <summary>
+    /// class that is used for the handling of files by other parts of the project mainly by the
+    /// configuration class.
+    /// </summary>
     public class FileManager
     {
         public FileManager(string filePath)

@@ -36,6 +36,7 @@
             this.button_CORS = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_triki = new System.Windows.Forms.Button();
             this.button_help = new System.Windows.Forms.Button();
             this.button_configuration = new System.Windows.Forms.Button();
             this.button_stop = new System.Windows.Forms.Button();
@@ -125,6 +126,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.button_triki);
             this.panel1.Controls.Add(this.button_help);
             this.panel1.Controls.Add(this.button_configuration);
             this.panel1.Controls.Add(this.button_stop);
@@ -135,6 +137,17 @@
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(303, 356);
             this.panel1.TabIndex = 0;
+            // 
+            // button_triki
+            // 
+            this.button_triki.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button_triki.Location = new System.Drawing.Point(0, 193);
+            this.button_triki.Name = "button_triki";
+            this.button_triki.Size = new System.Drawing.Size(303, 47);
+            this.button_triki.TabIndex = 4;
+            this.button_triki.Text = "Triki";
+            this.button_triki.UseVisualStyleBackColor = true;
+            this.button_triki.Click += new System.EventHandler(this.button_triki_Click);
             // 
             // button_help
             // 
@@ -151,9 +164,9 @@
             // 
             this.button_configuration.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button_configuration.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_configuration.Location = new System.Drawing.Point(0, 286);
+            this.button_configuration.Location = new System.Drawing.Point(0, 311);
             this.button_configuration.Name = "button_configuration";
-            this.button_configuration.Size = new System.Drawing.Size(303, 70);
+            this.button_configuration.Size = new System.Drawing.Size(303, 45);
             this.button_configuration.TabIndex = 2;
             this.button_configuration.Text = "Configuration";
             this.button_configuration.UseVisualStyleBackColor = false;
@@ -350,5 +363,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button button_CORS2;
         private System.Windows.Forms.Button loadXML;
+        private System.Windows.Forms.Button button_triki;
     }
 }

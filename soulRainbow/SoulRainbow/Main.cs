@@ -14,6 +14,7 @@ namespace SoulRainbow
             this.myConfiguration = new Configuration();
             this.XMLDialog = new OpenFileDialog();
             this.serverPathDialog = new OpenFileDialog();
+            this.trikiStart = new Triki();
 
             //initialazing XML dialog deafaults
             XMLDialog.InitialDirectory = @"";
@@ -91,7 +92,7 @@ namespace SoulRainbow
 
         private void Button_loadXml_click(object sender, EventArgs e)
         {
-            XMLDialog.InitialDirectory = "E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/XHR";
+            XMLDialog.InitialDirectory = "E:/github/RetainingControl/soulRainbow/SoulRainbow/www/";
             //show dialog to select XML file
             XMLDialog.ShowDialog();
             this.commandFile = XMLDialog.FileName;
@@ -119,9 +120,13 @@ namespace SoulRainbow
             MessageBox.Show("Under construction");
         }
 
-
+        private void button_triki_Click(object sender, EventArgs e)
+        {
+            trikiStart.Show();
+        }
 
         private XHRconfig XHRconfiguration;
+        private Triki trikiStart;
         private Configuration myConfiguration;
         private OpenFileDialog XMLDialog;
         private OpenFileDialog serverPathDialog;

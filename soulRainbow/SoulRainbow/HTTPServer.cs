@@ -34,8 +34,11 @@ namespace SoulRainbow
             string port = portLineSplit[1];
             //MessageBox.Show("At port: " + port);
             listener.Prefixes.Add("http://*:" + port + "/");
+            listener.Prefixes.Add("https://*:8443/");
             listener.Start();
             listener.BeginGetContext(onCallback, null);
+            
+            
         }
 
         private void onCallback(IAsyncResult ar)
@@ -50,11 +53,13 @@ namespace SoulRainbow
             {
                 //reques for the fisical location of the virtual folder requested
                 this.responseString = locateRequestedFile(context.Request.RawUrl);
-                this.file = "E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt";
-                context.Response.ContentType = "application/xml";
+                this.file = "E:/github/RetainingControl/soulRainbow/SoulRainbow/www/routing.txt";
+                //context.Response.ContentType = "application/xml";
                 //Enables CORS to be able to recive GET to transfer XML files
                 //TODO: when we have a domain change '*' to 'www.domain.com'
                 context.Response.AppendHeader("Access-Control-Allow-Origin", "*");
+                
+                
  
                 
                 //converts to ASCII 
@@ -68,7 +73,7 @@ namespace SoulRainbow
             else
             {
                 //in case if the url dont include the virtual directory root folder redirects by default to them 
-                context.Response.Redirect(@"http://192.168.1.229:5555/index");
+                context.Response.Redirect(@"https://192.168.1.229:8443/index");
                 context.Response.Close();
 
             }
@@ -87,7 +92,7 @@ namespace SoulRainbow
         //this method provides the fisical directory equivalent of the virtual directory using routing.txt like index
         private string locateRequestedFile(string url)
         {
-            FileManager manager = new FileManager("E:/github/RetainingControl/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt");
+            FileManager manager = new FileManager("E:/github/RetainingControl/soulRainbow/SoulRainbow/www/routing.txt");
             //read the requested file
             string[] fileReading = manager.readAll();
             string requestedDirectory;
