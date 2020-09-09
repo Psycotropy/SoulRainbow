@@ -102,9 +102,59 @@ namespace SoulRainbow
             return manager.readLineByString(PortLocal);
         }
 
+
+        public void directoryScanner(string wwwPath, List<string> directories, List<string> files)
+        {
+            Dictionary<string, string> virtualDirs = new Dictionary<string, string>();
+
+            
+            foreach(string fisicalPath in files)
+            {
+                string dir = "/index";
+                char[] delimiter = { '\\' };
+
+                string[] fisicalPathSplited = fisicalPath.Split(delimiter);
+
+                MessageBox.Show(fisicalPathSplited[fisicalPathSplited.Length - 2]);
+
+                if (fisicalPathSplited[fisicalPathSplited.Length - 2] == "www" || true == true)
+                {
+                    dir = dir + "/" + fisicalPathSplited[fisicalPathSplited.Length - 1];
+                    virtualDirs.Add(fisicalPath, dir);
+                }
+                else
+                {
+                    //TODO: make this part of the statement generating a complete virtual dir from the fisical path
+                    string dirInverted;
+
+                    for (int i = fisicalPathSplited.Length; fisicalPathSplited[i] == "www"; i--)
+                    {
+                        string aux = "";
+                        dirInverted = aux + "\\" + fisicalPathSplited[i] + "\\";
+                        aux = dirInverted;
+                    }
+
+                    //string[] dirInvertedSplited = dirInverted.Split(delimiter);
+                    
+                    
+
+
+                }
+
+                
+                
+
+                
+
+            }
+
+            routingFileGenerator(wwwPath, virtualDirs);
+        }
+
+
         public void routingFileGenerator(string wwwPath, Dictionary<string, string> linkedDirectories)
         {
-            string routingTxtPath = wwwPath + "\\" + "routing2.txt";
+            string routingTxtPath = wwwPath + "\\" + "routing.txt";
 
             File.Delete(routingTxtPath);
 

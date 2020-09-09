@@ -63,18 +63,25 @@ namespace SoulRainbow
 
             if (this.optionXHR == true)
             {
-
-                if (this.commandFile.Length > 0)
+                try
                 {
-                    //MessageBox.Show("pwn");
-                    XMLServer server = new XMLServer();
-                    server.setXMLFilePath(this.commandFile);
-                    server.startServerXML();
+                    if (this.commandFile.Length > 0)
+                    {
+                        //MessageBox.Show("pwn");
+                        XMLServer server = new XMLServer();
+                        server.setXMLFilePath(this.commandFile);
+                        server.startServerXML();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe elegir un archivo con comandos XML");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    MessageBox.Show("Debe elegir un archivo con comandos XML");
+                    MessageBox.Show("We are in troubles for more info: " + ex);
                 }
+                
             }
 
         }

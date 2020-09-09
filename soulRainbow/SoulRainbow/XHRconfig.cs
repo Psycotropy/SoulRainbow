@@ -56,9 +56,9 @@ namespace SoulRainbow
 
             //TODO: generate a routing.txt file with the dictionary data
             //generate dictionary related to the value of the dictionary with its key calling the physical directory
-            Dictionary<string,string> dirs = virutalDirGenerator(subDirectories, Files);
+            XHRconfiguration.directoryScanner(this.textBox_serverPath.Text, subDirectories, Files);
 
-            XHRconfiguration.routingFileGenerator(this.textBox_serverPath.Text, dirs);
+            //XHRconfiguration.routingFileGenerator(this.textBox_serverPath.Text, dirs);
 
         }
 
@@ -88,108 +88,6 @@ namespace SoulRainbow
             return files;
         }
 
-        private Dictionary<string, string> virutalDirGenerator(List<string> directories, List<string> files)
-        {
-            Dictionary<string, string> virtualDirs = new Dictionary<string, string>();
-            List<string> foo = new List<string>();
-
-            char[] delimiter = {'\\'};
-
-            //select a single path in directory
-            foreach(string dirs in directories)
-            {
-                //break the path into words without the '\'
-                string[] directorySplited = dirs.Split(delimiter);
-
-                //cycle through each of the folder names
-                for (int i = 0; i < directorySplited.Length; i++)
-                {
-
-                    //until it finds the key name of the root directory (www) breaking the path in two
-                    if (directorySplited[i].Contains("www"))
-                    {
-
-                        //variable used to generate the virtual directories starting from /index
-                        string virtualDirConcatenated = "/index/";
-
-
-                        int j;
-
-                        //loop through each directory name after www folder
-                        for (j = 1; j < directorySplited.Length - i; j++)
-                        {
-                            //this if add the '\' to directory path
-                            if (j >= 2)
-                            {
-                                virtualDirConcatenated = "/index/";
-                            }
-
-                            //in case if virtual dir is in case it finds root directory for the subsequent concatenation
-                            if (j != 1)
-                            {
-                                virtualDirConcatenated = virtualDirConcatenated + directorySplited[i + j] + "/";
-                            }
-                            else
-                            {
-                                virtualDirConcatenated = virtualDirConcatenated.Substring(0, 6);
-                            }
-                               
-                        }
-
-                        /*uncomment in case of debugging
-                        //MessageBox.Show("virtual dir added: " + virtualDirConcatenated);
-
-                        */
-
-                        //TODO: add the corresponded fisical path to the virtualDirs
-                        
-                        foreach (string fisicalPath in files)
-                        {
-                            //MessageBox.Show("fisical path: " + fisicalPath);
-                            if (fisicalPath.Substring(6).Contains(virtualDirConcatenated.Substring(6)) || virtualDirConcatenated.Length == 6)
-                            {
-                                MessageBox.Show("fisical path relationed: " + fisicalPath);
-                                foo.Add(fisicalPath);
-
-
-
-                                Regex reg = new Regex("^[0-9]*$");
-
-                                foreach (KeyValuePair<string, string> virtualDir in virtualDirs)
-                                {
-                                    if (reg.IsMatch(virtualDir.Key))
-                                    {
-                                        string key = virtualDir.Key;
-                                        string value = fisicalPath;
-
-
-                                        virtualDirs.Add(key, value);
-                                    }
-                                }
-                            }
-
-                        }
-
-                        virtualDirs.Add(virtualDirConcatenated, "2");
-                    }
-                }   
-            }
-
-            foreach(KeyValuePair<string,string> virtualDir in virtualDirs)
-            {
-                MessageBox.Show("Key: " + virtualDir.Key + " value: " + virtualDir.Value);
-            }
-
-            foreach (string fisicalPath in foo)
-            {
-                MessageBox.Show(fisicalPath);
-            }
-
-            
-            return virtualDirs;
-        }
-
-        
 
         //configuration input values
         private string port;

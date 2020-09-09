@@ -1,0 +1,7 @@
+#commands to generates certificates using vs developer command prompy
+#1 with makecert.exe specify the subject name, CA authority and private key with their respective certificate
+makecert -n "CN=vSoulrainbowCA" -r -sv  E:\_demo\vSoulrainbowCA.pvk  E:\_demo\soulrainbowCA.cer
+
+#2 Use makecert.exe to create an SSL certificate
+makecert -sk vSoulrainbowSignedByCa -iv E:\_demo\vSoulrainbowCA.pvk -n "CN=vSoulrainbowSignedByCA" -ic E:\_demo\SoulrainbowCA.cer E:\_demo\vSoulrainbowSignedByCA.cer -sr localmachine -ss My
+
