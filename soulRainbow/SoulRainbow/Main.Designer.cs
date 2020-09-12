@@ -317,7 +317,6 @@
             this.loadXML.TabIndex = 0;
             this.loadXML.Text = "Load XML file";
             this.loadXML.UseVisualStyleBackColor = true;
-            this.loadXML.Click += new System.EventHandler(this.Button_loadXml_click);
             // 
             // Main
             // 
@@ -345,7 +344,6 @@
         private System.Windows.Forms.Panel panel_general;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListBox list_ActConnections;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label_connections;
         private System.Windows.Forms.Button button_help;
@@ -364,5 +362,6 @@
         private System.Windows.Forms.Button button_CORS2;
         private System.Windows.Forms.Button loadXML;
         private System.Windows.Forms.Button button_triki;
+        private System.Windows.Forms.ListBox list_ActConnections;
     }
 }

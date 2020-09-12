@@ -115,36 +115,10 @@ namespace SoulRainbow
 
                 string[] fisicalPathSplited = fisicalPath.Split(delimiter);
 
-                MessageBox.Show(fisicalPathSplited[fisicalPathSplited.Length - 2]);
+                //MessageBox.Show("El primer messageBOx" + fisicalPathSplited[fisicalPathSplited.Length - 2]);
 
-                if (fisicalPathSplited[fisicalPathSplited.Length - 2] == "www" || true == true)
-                {
-                    dir = dir + "/" + fisicalPathSplited[fisicalPathSplited.Length - 1];
-                    virtualDirs.Add(fisicalPath, dir);
-                }
-                else
-                {
-                    //TODO: make this part of the statement generating a complete virtual dir from the fisical path
-                    string dirInverted;
-
-                    for (int i = fisicalPathSplited.Length; fisicalPathSplited[i] == "www"; i--)
-                    {
-                        string aux = "";
-                        dirInverted = aux + "\\" + fisicalPathSplited[i] + "\\";
-                        aux = dirInverted;
-                    }
-
-                    //string[] dirInvertedSplited = dirInverted.Split(delimiter);
-                    
-                    
-
-
-                }
-
-                
-                
-
-                
+                dir = dir + "/" + fisicalPathSplited[fisicalPathSplited.Length - 1];
+                virtualDirs.Add(fisicalPath, dir);
 
             }
 
@@ -179,6 +153,7 @@ namespace SoulRainbow
         private string channelName;
         private string clientsCabinetPath;
         
+
 
     }
 

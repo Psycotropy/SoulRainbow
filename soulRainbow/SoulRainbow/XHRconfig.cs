@@ -49,12 +49,6 @@ namespace SoulRainbow
             List<string> Files = new List<string>();
             Files = fileScanner(this.folderPath);
 
-            foreach (string filepath in Files)
-            {
-                //MessageBox.Show("filepath: " + filepath);
-            }
-
-            //TODO: generate a routing.txt file with the dictionary data
             //generate dictionary related to the value of the dictionary with its key calling the physical directory
             XHRconfiguration.directoryScanner(this.textBox_serverPath.Text, subDirectories, Files);
 

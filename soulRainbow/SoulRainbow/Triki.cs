@@ -17,23 +17,20 @@ namespace SoulRainbow
             InitializeComponent();
 
             //class variables
-            this.server = new HTTPServer();
+            
         }
 
         private void button_start_Click(object sender, EventArgs e)
         {
             try
             {
-                server.start();
+                //server.startServerTriki();
                 this.label_info.Text = "Started listening for cookies on port...";
             }
             catch(Exception ex)
             {
                 MessageBox.Show("some problem occurs, for more info: " + ex);
             }
-            
-        }
-
-        private HTTPServer server;
+        }        
     }
 }
