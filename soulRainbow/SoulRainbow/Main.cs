@@ -18,10 +18,9 @@ namespace SoulRainbow
             this.XMLDialog = new OpenFileDialog();
             this.serverPathDialog = new OpenFileDialog();
             this.trikiStart = new Triki();
+            
 
-            this.HTTPServer = new HTTPServer();
-            HTTPServer.clientRecieved += HTTPServer_clientRecieved;
-            HTTPServer.start();
+
 
 
             //initialazing XML dialog deafaults
@@ -77,10 +76,10 @@ namespace SoulRainbow
             {
                 try
                 {
-                    XMLServer server = new XMLServer();
-                    server.startServerXML();
-
-
+                    this.HTTPServer = new HTTPServer();
+                    HTTPServer.clientRecieved += HTTPServer_clientRecieved;
+                    HTTPServer.start();
+                    
 
                 }
                 catch (Exception ex)
@@ -90,6 +89,11 @@ namespace SoulRainbow
 
             }
 
+        }
+
+        private void button_stop_Click(object sender, EventArgs e)
+        {
+            HTTPServer.stop();
         }
 
         private void button_WS_Click(object sender, EventArgs e)
@@ -132,18 +136,20 @@ namespace SoulRainbow
 
 
         //classes variables and program variables 
-        private XHRconfig XHRconfiguration;
         private Triki trikiStart;
         private Configuration myConfiguration;
         private OpenFileDialog XMLDialog;
         private OpenFileDialog serverPathDialog;
         private HTTPServer HTTPServer;
-        
+
+
         //Events handlers
-       
+
 
         //menu selection flags
         private bool optionXHR;
+
+        
     }
         
 

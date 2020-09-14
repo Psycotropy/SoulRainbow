@@ -15,7 +15,7 @@ namespace SoulRainbow
         public Configuration()
         {
             this.filePath = "config.conf";
-            this.clientsCabinetPath = "clients.txt";
+            
             
         }
 
@@ -30,6 +30,11 @@ namespace SoulRainbow
             else
                 MessageBox.Show("The valid port range is between 0 - 65.535");
 
+        }
+
+        public void setServerPath(string serverFolderPath)
+        {
+            this.serverFolderPath = serverFolderPath;
         }
 
 
@@ -93,6 +98,8 @@ namespace SoulRainbow
                    
             //Add the new configuration to the config file
             manager.addLine(configToAdd);
+
+            manager.addLine("serverPath," + this.serverFolderPath);
             
         }
 
@@ -146,14 +153,10 @@ namespace SoulRainbow
             }
         }
 
-
-
         private string filePath;
         private string PortLocal;
         private string channelName;
-        private string clientsCabinetPath;
-        
-
+        private string serverFolderPath;
 
     }
 

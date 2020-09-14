@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SoulRainbow
@@ -15,14 +8,13 @@ namespace SoulRainbow
         public Triki()
         {
             InitializeComponent();
-
-            //class variables
             
         }
 
         private void button_start_Click(object sender, EventArgs e)
         {
-            try
+            MessageBox.Show("Under construction");
+            /*try
             {
                 //server.startServerTriki();
                 this.label_info.Text = "Started listening for cookies on port...";
@@ -30,7 +22,7 @@ namespace SoulRainbow
             catch(Exception ex)
             {
                 MessageBox.Show("some problem occurs, for more info: " + ex);
-            }
+            }*/
         }        
     }
 }

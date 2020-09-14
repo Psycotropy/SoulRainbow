@@ -34,25 +34,32 @@ namespace SoulRainbow
 
         private void button_saveXHR_Click(object sender, EventArgs e)
         {
-            //add port to the conf file 
-            this.port = textBox_Port.Text;
-            this.folderPath = this.textBox_serverPath.Text;
+            try
+            {
+                //add port to the conf file 
+                this.port = textBox_Port.Text;
+                this.folderPath = this.textBox_serverPath.Text;
 
-            directoryScanner(this.textBox_serverPath.Text);
-            XHRconfiguration.setConfProperties("XHR", this.port);
-            XHRconfiguration.configurate();
+                directoryScanner(this.textBox_serverPath.Text);
+                XHRconfiguration.setConfProperties("XHR", this.port);
+                XHRconfiguration.setServerPath(this.folderPath);
+                XHRconfiguration.configurate();
 
-            //retrive all the fisical path of dirs and files using the virtualDirGenerator method
-            List<string> subDirectories = new List<string>();
-            subDirectories = directoryScanner(this.folderPath);
+                //retrive all the fisical path of dirs and files using the virtualDirGenerator method
+                List<string> subDirectories = new List<string>();
+                subDirectories = directoryScanner(this.folderPath);
 
-            List<string> Files = new List<string>();
-            Files = fileScanner(this.folderPath);
+                List<string> Files = new List<string>();
+                Files = fileScanner(this.folderPath);
 
-            //generate dictionary related to the value of the dictionary with its key calling the physical directory
-            XHRconfiguration.directoryScanner(this.textBox_serverPath.Text, subDirectories, Files);
+                //generate dictionary related to the value of the dictionary with its key calling the physical directory
+                XHRconfiguration.directoryScanner(this.textBox_serverPath.Text, subDirectories, Files);
 
-            //XHRconfiguration.routingFileGenerator(this.textBox_serverPath.Text, dirs);
+                //XHRconfiguration.routingFileGenerator(this.textBox_serverPath.Text, dirs);
+            }catch(Exception ex)
+            {
+                MessageBox.Show("We have some problems here try rebooting the tool and configurate your parameters before start listening");
+            }
 
         }
 

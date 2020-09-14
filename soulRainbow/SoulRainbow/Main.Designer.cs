@@ -182,6 +182,7 @@
             this.button_stop.TabIndex = 1;
             this.button_stop.Text = "Stop Listen";
             this.button_stop.UseVisualStyleBackColor = false;
+            this.button_stop.Click += new System.EventHandler(this.button_stop_Click);
             // 
             // button_listen
             // 
