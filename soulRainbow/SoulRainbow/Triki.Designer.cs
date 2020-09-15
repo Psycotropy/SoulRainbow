@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Triki));
             this.panel_body = new System.Windows.Forms.Panel();
-            this.label_title = new System.Windows.Forms.Label();
-            this.panel_right = new System.Windows.Forms.Panel();
-            this.button_start = new System.Windows.Forms.Button();
-            this.button_stop = new System.Windows.Forms.Button();
+            this.panel_bodyLeft = new System.Windows.Forms.Panel();
+            this.list_cookies = new System.Windows.Forms.ListBox();
             this.panel_headerLeft = new System.Windows.Forms.Panel();
             this.label_info = new System.Windows.Forms.Label();
-            this.panel_bodyLeft = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.panel_right = new System.Windows.Forms.Panel();
+            this.button_stop = new System.Windows.Forms.Button();
+            this.button_start = new System.Windows.Forms.Button();
+            this.label_title = new System.Windows.Forms.Label();
             this.panel_body.SuspendLayout();
-            this.panel_right.SuspendLayout();
-            this.panel_headerLeft.SuspendLayout();
             this.panel_bodyLeft.SuspendLayout();
+            this.panel_headerLeft.SuspendLayout();
+            this.panel_right.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_body
@@ -55,46 +55,23 @@
             this.panel_body.Size = new System.Drawing.Size(560, 324);
             this.panel_body.TabIndex = 0;
             // 
-            // label_title
+            // panel_bodyLeft
             // 
-            this.label_title.AutoSize = true;
-            this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label_title.Location = new System.Drawing.Point(133, 27);
-            this.label_title.Name = "label_title";
-            this.label_title.Size = new System.Drawing.Size(288, 25);
-            this.label_title.TabIndex = 1;
-            this.label_title.Text = "Triki module for cookie hijacking";
+            this.panel_bodyLeft.Controls.Add(this.list_cookies);
+            this.panel_bodyLeft.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_bodyLeft.Location = new System.Drawing.Point(0, 35);
+            this.panel_bodyLeft.Name = "panel_bodyLeft";
+            this.panel_bodyLeft.Size = new System.Drawing.Size(355, 289);
+            this.panel_bodyLeft.TabIndex = 2;
             // 
-            // panel_right
+            // list_cookies
             // 
-            this.panel_right.Controls.Add(this.button_stop);
-            this.panel_right.Controls.Add(this.button_start);
-            this.panel_right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel_right.Location = new System.Drawing.Point(355, 0);
-            this.panel_right.Name = "panel_right";
-            this.panel_right.Size = new System.Drawing.Size(205, 324);
-            this.panel_right.TabIndex = 0;
-            // 
-            // button_start
-            // 
-            this.button_start.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button_start.Location = new System.Drawing.Point(0, 0);
-            this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(205, 60);
-            this.button_start.TabIndex = 0;
-            this.button_start.Text = "start";
-            this.button_start.UseVisualStyleBackColor = true;
-            this.button_start.Click += new System.EventHandler(this.button_start_Click);
-            // 
-            // button_stop
-            // 
-            this.button_stop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button_stop.Location = new System.Drawing.Point(0, 60);
-            this.button_stop.Name = "button_stop";
-            this.button_stop.Size = new System.Drawing.Size(205, 60);
-            this.button_stop.TabIndex = 1;
-            this.button_stop.Text = "stop";
-            this.button_stop.UseVisualStyleBackColor = true;
+            this.list_cookies.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.list_cookies.FormattingEnabled = true;
+            this.list_cookies.Location = new System.Drawing.Point(0, 12);
+            this.list_cookies.Name = "list_cookies";
+            this.list_cookies.Size = new System.Drawing.Size(355, 277);
+            this.list_cookies.TabIndex = 0;
             // 
             // panel_headerLeft
             // 
@@ -116,23 +93,46 @@
             this.label_info.TabIndex = 0;
             this.label_info.Text = "click start to listen for cookies";
             // 
-            // panel_bodyLeft
+            // panel_right
             // 
-            this.panel_bodyLeft.Controls.Add(this.listBox1);
-            this.panel_bodyLeft.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_bodyLeft.Location = new System.Drawing.Point(0, 35);
-            this.panel_bodyLeft.Name = "panel_bodyLeft";
-            this.panel_bodyLeft.Size = new System.Drawing.Size(355, 289);
-            this.panel_bodyLeft.TabIndex = 2;
+            this.panel_right.Controls.Add(this.button_stop);
+            this.panel_right.Controls.Add(this.button_start);
+            this.panel_right.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel_right.Location = new System.Drawing.Point(355, 0);
+            this.panel_right.Name = "panel_right";
+            this.panel_right.Size = new System.Drawing.Size(205, 324);
+            this.panel_right.TabIndex = 0;
             // 
-            // listBox1
+            // button_stop
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(355, 277);
-            this.listBox1.TabIndex = 0;
+            this.button_stop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button_stop.Location = new System.Drawing.Point(0, 60);
+            this.button_stop.Name = "button_stop";
+            this.button_stop.Size = new System.Drawing.Size(205, 60);
+            this.button_stop.TabIndex = 1;
+            this.button_stop.Text = "stop";
+            this.button_stop.UseVisualStyleBackColor = true;
+            // 
+            // button_start
+            // 
+            this.button_start.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button_start.Location = new System.Drawing.Point(0, 0);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(205, 60);
+            this.button_start.TabIndex = 0;
+            this.button_start.Text = "start";
+            this.button_start.UseVisualStyleBackColor = true;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            // 
+            // label_title
+            // 
+            this.label_title.AutoSize = true;
+            this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label_title.Location = new System.Drawing.Point(133, 27);
+            this.label_title.Name = "label_title";
+            this.label_title.Size = new System.Drawing.Size(288, 25);
+            this.label_title.TabIndex = 1;
+            this.label_title.Text = "Triki module for cookie hijacking";
             // 
             // Triki
             // 
@@ -147,10 +147,10 @@
             this.Name = "Triki";
             this.Text = "Triki";
             this.panel_body.ResumeLayout(false);
-            this.panel_right.ResumeLayout(false);
+            this.panel_bodyLeft.ResumeLayout(false);
             this.panel_headerLeft.ResumeLayout(false);
             this.panel_headerLeft.PerformLayout();
-            this.panel_bodyLeft.ResumeLayout(false);
+            this.panel_right.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,7 +160,7 @@
 
         private System.Windows.Forms.Panel panel_body;
         private System.Windows.Forms.Panel panel_bodyLeft;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox list_cookies;
         private System.Windows.Forms.Panel panel_headerLeft;
         private System.Windows.Forms.Label label_info;
         private System.Windows.Forms.Panel panel_right;

