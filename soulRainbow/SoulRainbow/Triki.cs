@@ -37,5 +37,15 @@ namespace SoulRainbow
         }
 
         private HTTPServer HTTPServer;
+
+        private void list_cookies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void list_cookies_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show(list_cookies.SelectedItem.ToString()); 
+        }
     }
 }

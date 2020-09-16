@@ -72,6 +72,8 @@
             this.list_cookies.Name = "list_cookies";
             this.list_cookies.Size = new System.Drawing.Size(355, 277);
             this.list_cookies.TabIndex = 0;
+            this.list_cookies.SelectedIndexChanged += new System.EventHandler(this.list_cookies_SelectedIndexChanged);
+            this.list_cookies.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.list_cookies_MouseDoubleClick);
             // 
             // panel_headerLeft
             // 

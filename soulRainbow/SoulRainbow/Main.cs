@@ -149,7 +149,10 @@ namespace SoulRainbow
         //menu selection flags
         private bool optionXHR;
 
-        
+        private void list_ActConnections_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
         
 

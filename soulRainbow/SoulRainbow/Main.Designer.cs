@@ -81,6 +81,7 @@
             this.list_ActConnections.Name = "list_ActConnections";
             this.list_ActConnections.Size = new System.Drawing.Size(415, 256);
             this.list_ActConnections.TabIndex = 3;
+            this.list_ActConnections.SelectedIndexChanged += new System.EventHandler(this.list_ActConnections_SelectedIndexChanged);
             // 
             // panel3
             // 

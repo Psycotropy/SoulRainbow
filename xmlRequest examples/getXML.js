@@ -1,36 +1,32 @@
-function comezar(){
-    zonadatos = document.getElementById("dataZone");
-    var boton = document.getElementById("button");
+function start(){
+    dataZone = document.getElementById("dataZone");
+    var button = document.getElementById("button");
 
-    boton.addEventListener("click", leer, false);
+    button.addEventListener("click", read, false);
 }
 
-function leer(){
-    var url = 'file:///E:/Tools/soulRainbow/servers/SoulRainbow/SoulRainbow/www/routing.txt';
-    var url2 = 'http://192.168.1.229:5555/index/startControl.xml'
+function read(){
+    var url = 'http://192.168.1.229:5555/index/startControl.xml'
 
-    var solicitud = new XMLHttpRequest();
+    var request = new XMLHttpRequest();
 
-    
-        
+    request.addEventListener("load", show, false);
 
-    solicitud.addEventListener("load", mostrar, false);
-
-    solicitud.open('GET', url2, true);
+    request.open('POST', url, true);
 
     //add a custom header to the request to be indentified by the server
-    solicitud.setRequestHeader("soulrainbow|XML", "XML");
+    request.setRequestHeader("soulrainbow|xml", "XML");
 
-    solicitud.send(null);
+    request.send(null);
 }
 
-function mostrar(e){
+function show(e){
     
-    zonadatos.innerHTML = e.target.responseText;
+    dataZone.innerHTML = e.target.responseText;
     
 }
 
-window.addEventListener("load", comezar, false);
+window.addEventListener("load", start, false);
 
 
 
