@@ -41,9 +41,7 @@ namespace SoulRainbow
             //setting prefixes for http
             listener.Prefixes.Add("http://*:" + port + "/");
             listener.Prefixes.Add("https://*:8443/");
-            listener.Prefixes.Add("https://*:8443/");
-            //listener.Prefixes.Add("http://*:80/");
-
+       
             listener.Start();
             listener.BeginGetContext(onCallback, null);
 
@@ -78,13 +76,14 @@ namespace SoulRainbow
                     context.Response.AppendHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
                     context.Response.AppendHeader("Access-Control-Allow-Headers", "*");
 
-
+                    string accessControlHeader = context.Request.Headers.Get("Access-Control-Request-Headers");
+                    bool flag = false;
                     //send the request to be displayed in the program connections list
                     try
                     {
-                        string accessControlHeader = context.Request.Headers.Get("Access-Control-Request-Headers");
+                        
 
-                        if (context.Request.HasEntityBody) {
+                        if (context.Request.HasEntityBody && accessControlHeader.Contains("soulrainbow|cookies")) {
                             Stream StreamBody = context.Request.InputStream;
                             Encoding encoding = context.Request.ContentEncoding;
                             StreamReader reader = new StreamReader(StreamBody, encoding);
@@ -97,18 +96,22 @@ namespace SoulRainbow
                         }
                         else if (accessControlHeader.Contains("soulrainbow|xml"))
                         {
-                            var data = new ProcessEventArgs();
-                            data.clientIP = context.Request.UserHostAddress;
-                            data.additionalInfo = accessControlHeader;
-                            OnClientRecieved(data);
+                            var data = new XMLclientEventArgs();
+                            data.ClientIP = context.Request.UserHostAddress;
+                            data.AdditionalInfo = accessControlHeader;
+                            OnXMLclientReceived(data);
+                            flag = true;
                         }
                     }
                     catch
                     {
-                        var data = new ProcessEventArgs();
-                        data.clientIP = context.Request.UserHostAddress;
-                        data.additionalInfo = "normal client on your site";
-                        OnClientRecieved(data);
+                        if (!context.Request.Headers.ToString().Contains("soulrainbow|xml")) {
+                            var data = new ProcessEventArgs();
+                            data.ClientIP = context.Request.UserHostAddress;
+                            data.AdditionalInfo = "normal client on your site";
+                            OnClientRecieved(data);
+                        }
+                        
                     }
 
 
@@ -144,6 +147,11 @@ namespace SoulRainbow
         protected virtual void OnCookieRecieved(CookieHijackingEventArgs e)
         {
             CookieRecieved?.Invoke(this, e);
+        }
+
+        protected virtual void OnXMLclientReceived(XMLclientEventArgs e)
+        {
+            XMLclientRecieved?.Invoke(this, e);
         }
 
         
@@ -190,19 +198,26 @@ namespace SoulRainbow
         //Event Handlers
         public event EventHandler<ProcessEventArgs> clientRecieved;
         public event EventHandler<CookieHijackingEventArgs> CookieRecieved;
+        public event EventHandler<XMLclientEventArgs> XMLclientRecieved;
 
     }
 
     public class ProcessEventArgs : EventArgs
     {
-        public string clientIP { get; set; }
-        public string additionalInfo { get; set; }
+        public string ClientIP { get; set; }
+        public string AdditionalInfo { get; set; }
     }
 
     public class CookieHijackingEventArgs : EventArgs
     {
         public string ClientIP { get; set; }
         public string Domain { get; set; }
+        public string AdditionalInfo { get; set; }
+    }
+
+    public class XMLclientEventArgs : EventArgs
+    {
+        public string ClientIP { get; set; }
         public string AdditionalInfo { get; set; }
     }
 

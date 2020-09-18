@@ -32,9 +32,16 @@ namespace SoulRainbow
 
         private void HTTPServer_clientRecieved(object sender, ProcessEventArgs e)
         {
-            string clientIP = e.clientIP;
-            string additionalInfo = e.additionalInfo;
+            string clientIP = e.ClientIP;
+            string additionalInfo = e.AdditionalInfo;
             list_ActConnections.Items.Add("client ip: " + clientIP + " additional Info: " + additionalInfo);
+        }
+
+        private void HTTPServer_XMlclientRecieved(object sender, XMLclientEventArgs e)
+        {
+            string clientIP = e.ClientIP;
+            string additionalInfo = e.AdditionalInfo;
+            list_ActConnections.Items.Add("client XML request, client ip: " + clientIP + " additional Info: " + additionalInfo);
         }
 
         private void setMenuToFalse()
@@ -78,6 +85,7 @@ namespace SoulRainbow
                 {
                     this.HTTPServer = new HTTPServer();
                     HTTPServer.clientRecieved += HTTPServer_clientRecieved;
+                    HTTPServer.XMLclientRecieved += HTTPServer_XMlclientRecieved;
                     HTTPServer.start();
                     
 
@@ -93,7 +101,14 @@ namespace SoulRainbow
 
         private void button_stop_Click(object sender, EventArgs e)
         {
-            HTTPServer.stop();
+            try
+            {
+                HTTPServer.stop();
+            }
+            catch
+            {
+                MessageBox.Show("it seems you don't have any server running");
+            }
         }
 
         private void button_WS_Click(object sender, EventArgs e)
