@@ -40,7 +40,7 @@ namespace SoulRainbow
 
             //setting prefixes for http
             listener.Prefixes.Add("http://*:" + port + "/");
-            listener.Prefixes.Add("https://*:8443/");
+            //listener.Prefixes.Add("https://*:8443/");
        
             listener.Start();
             listener.BeginGetContext(onCallback, null);

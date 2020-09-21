@@ -58,7 +58,7 @@ namespace SoulRainbow
                 //XHRconfiguration.routingFileGenerator(this.textBox_serverPath.Text, dirs);
             }catch(Exception ex)
             {
-                MessageBox.Show("We have some problems here try rebooting the tool and configurate your parameters before start listening");
+                MessageBox.Show("We have some problems here try rebooting the tool and configurate your parameters before start listening" + ex);
             }
 
         }

@@ -53,6 +53,11 @@ namespace SoulRainbow
 
             FileManager manager = new FileManager(filePath);
 
+            if (!File.Exists(filePath))
+            {
+                manager.Create();
+            }
+
             //Get all in memory about actual configuration
             List<string> actualConfigList = new List<string>(manager.readAll());
 
@@ -137,7 +142,8 @@ namespace SoulRainbow
         {
             string routingTxtPath = wwwPath + "\\" + "routing.txt";
 
-            File.Delete(routingTxtPath);
+            if(!File.Exists(routingTxtPath))
+                File.Delete(routingTxtPath);
 
             FileManager manager = new FileManager(routingTxtPath);
 

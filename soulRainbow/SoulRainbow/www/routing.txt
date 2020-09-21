@@ -1,3 +1,6 @@
 /index/index.html, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\index.html
 /index/routing.txt, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\routing.txt
 /index/startControl.xml, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\XHR\startControl.xml
+/index/index.html, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\index.html
+/index/routing.txt, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\routing.txt
+/index/startControl.xml, E:\github\RetainingControl\soulRainbow\SoulRainbow\www\XHR\startControl.xml
