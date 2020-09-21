@@ -166,6 +166,35 @@ namespace SoulRainbow
 
     }
 
+    class ConfigurationDialogs : Configuration
+    {
+        public ConfigurationDialogs()
+        {
+
+        }
+
+        public List<string> directoryScanner(string path)
+        {
+            //all directories and subdirectories in this array
+            List<string> subDirs = new List<string>();
+
+
+            subDirs = Directory.GetDirectories(path, "*.*", SearchOption.AllDirectories).ToList<string>();
+
+            return subDirs;
+
+        }
+
+        public List<string> fileScanner(string path)
+        {
+            //all the files of the subdirs in this array
+            List<string> files = new List<string>();
+
+            files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList<string>();
+
+            return files;
+        }
+    }
 
     /// <summary>
     /// class that is used for the handling of files by other parts of the project mainly by the
