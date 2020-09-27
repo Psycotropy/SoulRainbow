@@ -15,8 +15,7 @@ namespace SoulRainbow
         public Configuration()
         {
             this.filePath = "config.conf";
-            
-            
+
         }
 
         public void setConfProperties(string channelName, string PortLocal)

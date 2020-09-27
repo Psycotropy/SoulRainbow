@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="DNSServer.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +62,12 @@
     </Compile>
     <Compile Include="Triki.Designer.cs">
       <DependentUpon>Triki.cs</DependentUpon>
+    </Compile>
+    <Compile Include="views\xmlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\xmlView.Designer.cs">
+      <DependentUpon>xmlView.cs</DependentUpon>
     </Compile>
     <Compile Include="XHRconfig.cs">
       <SubType>Form</SubType>
@@ -83,6 +90,9 @@
     <EmbeddedResource Include="Triki.resx">
       <DependentUpon>Triki.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="views\xmlView.resx">
+      <DependentUpon>xmlView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="XHRconfig.resx">
       <DependentUpon>XHRconfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,6 +109,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

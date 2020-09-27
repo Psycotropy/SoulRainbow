@@ -77,7 +77,6 @@ namespace SoulRainbow
                     context.Response.AppendHeader("Access-Control-Allow-Headers", "*");
 
                     string accessControlHeader = context.Request.Headers.Get("Access-Control-Request-Headers");
-                    bool flag = false;
                     //send the request to be displayed in the program connections list
                     try
                     {
@@ -100,7 +99,6 @@ namespace SoulRainbow
                             data.ClientIP = context.Request.UserHostAddress;
                             data.AdditionalInfo = accessControlHeader;
                             OnXMLclientReceived(data);
-                            flag = true;
                         }
                     }
                     catch

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SoulRainbow.views;
 using System.Threading;
 using System.Collections.Generic;
 using System.Drawing.Text;
@@ -18,40 +19,12 @@ namespace SoulRainbow
             this.XMLDialog = new OpenFileDialog();
             this.serverPathDialog = new OpenFileDialog();
             this.trikiStart = new Triki();
+            this.xmlRequestView = new xmlView();
             
-
-
-
-
             //initialazing XML dialog deafaults
             XMLDialog.InitialDirectory = @"";
             XMLDialog.Title = "Browse Xml Files";
             XMLDialog.DefaultExt = "xml";
-            setMenuToFalse();
-        }
-
-        private void HTTPServer_clientRecieved(object sender, ProcessEventArgs e)
-        {
-            string clientIP = e.ClientIP;
-            string additionalInfo = e.AdditionalInfo;
-            list_ActConnections.Items.Add("client ip: " + clientIP + " additional Info: " + additionalInfo);
-        }
-
-        private void HTTPServer_XMlclientRecieved(object sender, XMLclientEventArgs e)
-        {
-            string clientIP = e.ClientIP;
-            string additionalInfo = e.AdditionalInfo;
-            list_ActConnections.Items.Add("client XML request, client ip: " + clientIP + " additional Info: " + additionalInfo);
-        }
-
-        private void setMenuToFalse()
-        {
-            this.optionXHR = false;
-        }
-
-        public ListBox list_connections()
-        {
-            return this.list_ActConnections;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -75,52 +48,14 @@ namespace SoulRainbow
             configurationXML.Show();
         }
 
-        private void button_listen_Click(object sender, EventArgs e)
-        {
-            this.optionXHR = true;
-
-            if (this.optionXHR == true)
-            {
-                try
-                {
-                    this.HTTPServer = new HTTPServer();
-                    HTTPServer.clientRecieved += HTTPServer_clientRecieved;
-                    HTTPServer.XMLclientRecieved += HTTPServer_XMlclientRecieved;
-                    HTTPServer.start();
-                    
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("We are in troubles for more info: " + ex);
-                }
-
-            }
-
-        }
-
-        private void button_stop_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                HTTPServer.stop();
-            }
-            catch
-            {
-                MessageBox.Show("it seems you don't have any server running");
-            }
-        }
-
         private void button_WS_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Under construction");
         }
 
-
-
         private void button_DNS_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Under construction");
+            
             
         }
 
@@ -136,38 +71,19 @@ namespace SoulRainbow
 
         private void button_XmlRequest_Click(object sender, EventArgs e)
         {
-            
+            this.xmlRequestView.Parent = this;
+            this.xmlRequestView.Dock = DockStyle.Fill;
+            this.xmlRequestView.Show();
+            this.xmlRequestView.BringToFront();
         }
-
-
-        private void button_triki_Click(object sender, EventArgs e)
-        {
-            trikiStart.Show();
-            
-        }
-
-
-        
-
 
         //classes variables and program variables 
         private Triki trikiStart;
         private Configuration myConfiguration;
         private OpenFileDialog XMLDialog;
         private OpenFileDialog serverPathDialog;
-        private HTTPServer HTTPServer;
+        private xmlView xmlRequestView;
 
-
-        //Events handlers
-
-
-        //menu selection flags
-        private bool optionXHR;
-
-        private void list_ActConnections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
         
 
