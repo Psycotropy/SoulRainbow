@@ -63,6 +63,12 @@
     <Compile Include="Triki.Designer.cs">
       <DependentUpon>Triki.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\dnsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="views\dnsView.Designer.cs">
+      <DependentUpon>dnsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\xmlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     </Compile>
     <EmbeddedResource Include="Triki.resx">
       <DependentUpon>Triki.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\dnsView.resx">
+      <DependentUpon>dnsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\xmlView.resx">
       <DependentUpon>xmlView.cs</DependentUpon>
