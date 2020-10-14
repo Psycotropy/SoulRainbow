@@ -13,22 +13,26 @@ namespace SoulRainbow
     {
         public DNSServer()
         {
-            this.host = Dns.GetHostEntry("AUDIOCAST");
-            this.ipAddress = host.AddressList[0];
-            this.localEndpoint = new IPEndPoint(IPAddress.Any, 11000);
+            this.socket = new Socket(SocketType.Dgram, ProtocolType.Udp);
+            this.localEndpoint = new IPEndPoint(IPAddress.Any, 53);
         }
 
         public void startEndpoint()
         {
-            UdpClient server = new UdpClient(localEndpoint);
+            byte[] buffer = new byte[512];
 
-            server.BeginReceive(onAccept, null);
-            
+            socket.Bind(this.localEndpoint);
+            socket.BeginReceive(buffer, 0, 512, SocketFlags.None, new AsyncCallback(onAccept), null); 
         }
 
         private void onAccept(IAsyncResult ar)
         {
-            MessageBox.Show("cliente recivido");
+            MessageBox.Show("cliente recibido");
+            byte[] data = new byte[512];
+            int payload = this.socket.Receive(data);
+            Array.Resize<byte>(ref data, payload);
+            MessageBox.Show("Client says: " + Encoding.ASCII.GetString(data));
+            
         }
 
         static void acceptEventArgs_Completed(object sender, EventArgs e)
@@ -36,9 +40,8 @@ namespace SoulRainbow
             MessageBox.Show("se ha disparado");
         }
 
-        private IPHostEntry host;
-        private IPAddress ipAddress;
         private IPEndPoint localEndpoint;
+        private Socket socket;
 
     }
 }
