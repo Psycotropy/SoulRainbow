@@ -13,35 +13,49 @@ namespace SoulRainbow
     {
         public DNSServer()
         {
-            this.socket = new Socket(SocketType.Dgram, ProtocolType.Udp);
-            this.localEndpoint = new IPEndPoint(IPAddress.Any, 53);
+            this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         }
 
         public void startEndpoint()
         {
-            byte[] buffer = new byte[512];
-
-            socket.Bind(this.localEndpoint);
-            socket.BeginReceive(buffer, 0, 512, SocketFlags.None, new AsyncCallback(onAccept), null); 
+            //byte[] buffer = new byte[1024];
+            this.endpoint = new IPEndPoint(IPAddress.Any, 11000);
+            socket.Bind(this.endpoint);
+            socket.BeginReceiveFrom(buffer, 0, 512, SocketFlags.None, ref endpoint, onAccept, socket);
         }
 
         private void onAccept(IAsyncResult ar)
         {
-            MessageBox.Show("cliente recibido");
-            byte[] data = new byte[512];
-            int payload = this.socket.Receive(data);
-            Array.Resize<byte>(ref data, payload);
-            MessageBox.Show("Client says: " + Encoding.ASCII.GetString(data));
-            
+            int payload = this.socket.EndReceiveFrom(ar, ref this.endpoint);
+            Array.Resize<byte>(ref buffer, payload);
+
+            var data = new dnsClientEventArgs();
+            data.name = ((IPEndPoint)endpoint).Address.ToString();
+            data.message = Encoding.ASCII.GetString(buffer);
+
+            onClientReceived(data);
+
+            this.buffer = new byte[512];
+            socket.BeginReceiveFrom(buffer, 0, 512, SocketFlags.None, ref endpoint, onAccept, socket);
         }
 
-        static void acceptEventArgs_Completed(object sender, EventArgs e)
+        protected virtual void onClientReceived(dnsClientEventArgs e)
         {
-            MessageBox.Show("se ha disparado");
+            dnsClientReceived?.Invoke(this, e);
         }
 
-        private IPEndPoint localEndpoint;
         private Socket socket;
+        private EndPoint endpoint;
+        byte[] buffer = new byte[512];
 
+        public EventHandler<dnsClientEventArgs> dnsClientReceived;
+
+    }
+
+    public class dnsClientEventArgs : EventArgs
+    {
+        public string name { get; set; }
+        public string message { get; set; }
+        
     }
 }
