@@ -6,7 +6,7 @@ function start(){
 }
 
 function read(){
-    var url = 'http://192.168.1.229:5555/index/startControl.xml'
+    var url = 'http://192.168.1.113:5555/index/startControl.xml'
 
     var request = new XMLHttpRequest();
 

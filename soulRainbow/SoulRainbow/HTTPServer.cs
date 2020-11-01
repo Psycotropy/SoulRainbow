@@ -82,7 +82,7 @@ namespace SoulRainbow
                     {
                         
 
-                        if (context.Request.HasEntityBody && accessControlHeader.Contains("soulrainbow|cookies")) {
+                        if (context.Request.HasEntityBody || accessControlHeader.Contains("soulrainbow|cookies")) {
                             Stream StreamBody = context.Request.InputStream;
                             Encoding encoding = context.Request.ContentEncoding;
                             StreamReader reader = new StreamReader(StreamBody, encoding);
