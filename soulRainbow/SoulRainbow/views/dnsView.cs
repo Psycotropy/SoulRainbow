@@ -15,8 +15,6 @@ namespace SoulRainbow.views
         public dnsView()
         {
             InitializeComponent();
-
-            //initialize classes
             
         }
 
@@ -35,5 +33,15 @@ namespace SoulRainbow.views
         }
 
         private DNSServer dnsServer;
+
+        private void dnsView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void list_ActConnections_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("DNS query: " + list_ActConnections.SelectedItem.ToString());
+        }
     }
 }

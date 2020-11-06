@@ -42,7 +42,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(0, 192, 192);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel1.Controls.Add(this.button_help);
             this.panel1.Controls.Add(this.button_configuration);
             this.panel1.Controls.Add(this.button_stop);
@@ -102,7 +102,7 @@
             // label_connections
             // 
             this.label_connections.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_connections.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label_connections.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label_connections.Location = new System.Drawing.Point(180, 34);
             this.label_connections.Name = "label_connections";
             this.label_connections.Size = new System.Drawing.Size(284, 37);
@@ -117,10 +117,11 @@
             this.list_ActConnections.Name = "list_ActConnections";
             this.list_ActConnections.Size = new System.Drawing.Size(630, 318);
             this.list_ActConnections.TabIndex = 6;
+            this.list_ActConnections.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.list_ActConnections_MouseDoubleClick);
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(0, 192, 0);
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.panel3.Controls.Add(this.label_connections);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
