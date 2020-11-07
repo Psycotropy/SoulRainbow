@@ -1,4 +1,4 @@
-# BrowserRetainingControlTools
+# SoulRainbow
 A little suit to facilitate retention in browsers attack operations.
 
 Description:
