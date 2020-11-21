@@ -10,4 +10,9 @@ are XMLHTTPRequests, cross-origin-resource-sharing, webSocket, messaging, DnsTun
 
 Functionality:
 -------------------------------------------------------------------------------------------------------------------------------
-Actually only have the XMLHTTPRequests function.
+- XMLHTTPRequests function.
+- DNS TUNNEL function.
+-------------------------------------------------------------------------------------------------------------------------------
+
+![XMLHTTPREQUEST](https://github.com/Psycotropy/SoulRainbow/blob/master/readmeResources/XMLHTTP.jpg)
+![DNSTUNNEL](https://github.com/Psycotropy/SoulRainbow/blob/master/readmeResources/DnsTunnel.jpg)
